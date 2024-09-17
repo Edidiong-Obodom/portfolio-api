@@ -35,11 +35,11 @@ const corsOptions = {
 
 // Rate limiting to prevent brute-force attacks
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 15 minutes
+  windowMs: 1 * 60 * 1000, // 1 minute
   max: 10, // limit each IP to 10 requests per windowMs
   message: {
     message:
-      "Too many login attempts from this IP, please try again after 15 minutes.",
+      "Too many API calls from this IP.",
   },
   headers: true, // Send rate limit info in the `RateLimit-*` headers
 });
