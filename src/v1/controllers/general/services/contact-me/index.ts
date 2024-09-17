@@ -31,8 +31,23 @@ export const contactMe = async (req: Request, res: Response) => {
         <p>${message}</p>`, //HTML message
     };
 
+    //sends verification code to clients mail
+    const msg1 = {
+      from: `Edidiong Obodom <reventlifyhub@outlook.com>`, // sender address
+      to: email, // list of receivers
+      subject: `${Helpers.startWithCase(service)}`, // Subject line
+      text: `Mail received. Hi ${Helpers.startWithCase(
+        name.split(" ")[0]
+      )}, thank you for reaching out. I will respond shortly.`, // plain text body
+      html: `<h3>Mail received</h3>
+        <p>Hi ${Helpers.startWithCase(
+          name.split(" ")[0]
+        )}, thank you for reaching out. I will respond shortly.</p>`, //HTML message
+    };
+
     // send mail with defined transport object
     await transport.sendMail(msg);
+    await transport.sendMail(msg1);
     return res.status(200).json({
       message: "Email sent successfully...",
       from: String(Helpers.startWithCase(name)),
