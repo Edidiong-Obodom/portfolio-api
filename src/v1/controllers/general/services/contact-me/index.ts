@@ -20,10 +20,10 @@ export const contactMe = async (req: Request, res: Response) => {
   try {
     //credentials for email transportation
     const transport = nodemailer.createTransport(Helpers.mailCredentials);
-
+    
     //sends verification code to clients mail
     const msg = {
-      from: `${Helpers.startWithCase(name)} <reventlifyhub@outlook.com>`, // sender address
+      from: `${Helpers.startWithCase(name)} <${process.env.MAIL_USER}>`, // sender address
       to: "edijay17@gmail.com", // list of receivers
       subject: `${Helpers.startWithCase(service)}`, // Subject line
       text: `${Helpers.startWithCase(service)} (${email}). ${message}`, // plain text body
@@ -33,7 +33,7 @@ export const contactMe = async (req: Request, res: Response) => {
 
     //sends verification code to clients mail
     const msg1 = {
-      from: `Edidiong Obodom <reventlifyhub@outlook.com>`, // sender address
+      from: `Edidiong Obodom <${process.env.MAIL_USER}>`, // sender address
       to: email, // list of receivers
       subject: `${Helpers.startWithCase(service)}`, // Subject line
       text: `Mail received. Hi ${Helpers.startWithCase(
